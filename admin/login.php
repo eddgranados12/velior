@@ -1,5 +1,5 @@
 <?php
-// CONTROLADOR
+// CONTROLADORRRRR
 require_once(__DIR__ . "/sistema.class.php");
 
 if (session_status() === PHP_SESSION_NONE) {
