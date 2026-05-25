@@ -1,0 +1,6 @@
+{
+    "require": {
+        "stripe/stripe-php": "^20.0",
+        "mpdf/mpdf": "^8.2"
+    }
+}
