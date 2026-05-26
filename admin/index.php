@@ -15,6 +15,9 @@ if (!$sistema->esAdmin()) {
     exit();
 }
 
+echo "<pre>";
+print_r($_SESSION['permisos']);
+die();
 $sistema->checarPermiso('dashboard.view');
 
 $dashboard = new DashboardModel($sistema->db());
