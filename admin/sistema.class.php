@@ -244,7 +244,7 @@ class Sistema
 
 function envioCorreo($nombre_destinatario, $destinatario, $asunto, $cuerpo, $adjuntos = null)
     {
-        require '../vendor/autoload.php';
+        require_once __DIR__ . '/../vendor/autoload.php';
         $mail = new PHPMailer();
         $mail->isSMTP();
         //Enable SMTP debugging
@@ -259,6 +259,8 @@ function envioCorreo($nombre_destinatario, $destinatario, $asunto, $cuerpo, $adj
         $mail->Username = '22030782@itcelaya.edu.mx';
         $mail->Password = 'tglglmxbvpqtwsus';
         $mail->setFrom('22030782@itcelaya.edu.mx', 'Eduardo Granados');
+        $mail->CharSet = 'UTF-8';
+        $mail->isHTML(true);
         $mail->addAddress($destinatario, $nombre_destinatario);
         $mail->Subject = $asunto;
         $mail->msgHTML($cuerpo);
@@ -289,7 +291,19 @@ function envioCorreo($nombre_destinatario, $destinatario, $asunto, $cuerpo, $adj
                 $stmt->execute();
 
                 $contenido = "<p> Estimado usuario, haz solicitado restablecer tu contraseña. Para cambiar tu contraseña, haz clic en el siguiente enlace:</p>";
-                $contenido .= "<p><a href='http://localhost/velior/admin/login.php?accion=restablecer&correo=$correo&token=$token'>Restablecer contraseña</a>";
+                // Determinar base URL: usar BASE_URL si está definida, si no, intentar construirla desde el host
+                if (defined('BASE_URL') && BASE_URL) {
+                    $base = rtrim(BASE_URL, '/');
+                } else {
+                    if (isset($_SERVER['HTTP_HOST'])) {
+                        $scheme = (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] === 'on' || $_SERVER['HTTPS'] == 1)) ? 'https' : 'http';
+                        $base = $scheme . '://' . $_SERVER['HTTP_HOST'] . '/velior';
+                    } else {
+                        $base = 'http://localhost/velior';
+                    }
+                }
+                $link = $base . "/admin/login.php?accion=restablecer&correo=" . urlencode($correo) . "&token=" . $token;
+                $contenido .= "<p><a href='" . $link . "'>Restablecer contraseña</a>";
                 $this->envioCorreo('Usuario', $correo, 'Recuperar contraseña', $contenido, null);
 
             }
