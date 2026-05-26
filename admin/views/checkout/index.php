@@ -393,7 +393,7 @@
                 <?php unset($_SESSION['error_checkout']); ?>
             <?php endif; ?>
 
-            <form action="/velior/admin/carrito.php?accion=confirmar" method="POST">
+            <form action="/velior/admin/pedido.php?accion=confirmar" method="POST">
 
                 <div class="form-grupo">
                     <label>Nombre completo <span class="req">*</span></label>
@@ -462,17 +462,12 @@
                     <?php endif; ?>
 
                     <div class="resumen-info">
-                        <div class="resumen-nombre">
-                            <?= htmlspecialchars($item['nombre']) ?>
-                        </div>
-                        <div class="resumen-qty">Cantidad:
-                            <?= $item['cantidad'] ?>
-                        </div>
+                        <div class="resumen-nombre"><?= htmlspecialchars($item['nombre']) ?></div>
+                        <div class="resumen-qty">Cantidad: <?= $item['cantidad'] ?></div>
                     </div>
 
                     <div class="resumen-precio">
-                        $
-                        <?= number_format($item['subtotal'], 2) ?>
+                        $<?= number_format($item['subtotal'], 2) ?>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -480,9 +475,7 @@
             <div class="resumen-totales">
                 <div class="total-fila">
                     <span>Subtotal</span>
-                    <span class="monto">$
-                        <?= number_format($total, 2) ?>
-                    </span>
+                    <span class="monto">$<?= number_format($total, 2) ?></span>
                 </div>
                 <div class="total-fila">
                     <span>Envío</span>
@@ -490,9 +483,7 @@
                 </div>
                 <div class="total-fila grande">
                     <span>Total</span>
-                    <span class="monto">$
-                        <?= number_format($total, 2) ?> MXN
-                    </span>
+                    <span class="monto">$<?= number_format($total, 2) ?> MXN</span>
                 </div>
             </div>
 
