@@ -35,7 +35,7 @@ switch ($accion) {
 
     case 'recuperar':
         require_once(__DIR__ . "/views/login/login_header.php");
-        require(__DIR__ . "/views/login/index.php");
+        require_once(__DIR__ . "/views/login/recuperar.php");
         break;
 
     case 'logout':
