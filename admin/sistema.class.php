@@ -274,7 +274,7 @@ function envioCorreo($nombre_destinatario, $destinatario, $asunto, $cuerpo, $adj
         if (filter_var($correo, FILTER_VALIDATE_EMAIL)) {
             $this->conectar();
             $sql = "SELECT * FROM usuario WHERE correo = :correo";
-            $stmt = $this->getDb()->prepare($sql);
+            $stmt = $this->db()->prepare($sql);
             $stmt->bindParam(':correo', $correo, PDO::PARAM_STR);
             $stmt->execute();
             $cantidad = $stmt->rowCount();
@@ -283,7 +283,7 @@ function envioCorreo($nombre_destinatario, $destinatario, $asunto, $cuerpo, $adj
                 $port2 = md5(random_bytes(16));
                 $token = $port1 . $port2;
                 $sql = "UPDATE usuario SET token = :token WHERE correo = :correo";
-                $stmt = $this->getDb()->prepare($sql);
+                $stmt = $this->db()->prepare($sql);
                 $stmt->bindParam(':token', $token, PDO::PARAM_STR);
                 $stmt->bindParam(':correo', $correo, PDO::PARAM_STR);
                 $stmt->execute();
@@ -300,7 +300,7 @@ function envioCorreo($nombre_destinatario, $destinatario, $asunto, $cuerpo, $adj
     function cambiarContrasena($correo, $token, $contrasena_nueva){
         $this->conectar();
         $sql = "SELECT * FROM usuario WHERE correo = :correo AND token = :token";
-        $stmt = $this->getDb()->prepare($sql);
+        $stmt = $this->db()->prepare($sql);
         $stmt->bindParam(':correo', $correo, PDO::PARAM_STR);
         $stmt->bindParam(':token', $token, PDO::PARAM_STR);
         $stmt->execute();
@@ -308,7 +308,7 @@ function envioCorreo($nombre_destinatario, $destinatario, $asunto, $cuerpo, $adj
         if ($cantidad > 0) {
             $password = md5($contrasena_nueva);
             $sql = "UPDATE usuario SET contrasena = :contrasena, token = NULL WHERE correo = :correo";
-            $stmt = $this->getDb()->prepare($sql);
+            $stmt = $this->db()->prepare($sql);
             $stmt->bindParam(':contrasena', $password, PDO::PARAM_STR);
             $stmt->bindParam(':correo', $correo, PDO::PARAM_STR);
             return $stmt->execute();

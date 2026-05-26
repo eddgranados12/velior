@@ -18,6 +18,6 @@
 
     <!-- Back to login -->
     <div class="text-center mt-4">
-        <a href="login.php">← Volver al inicio de sesión</a>
+        <a href="login.php">Volver al inicio de sesión</a>
     </div>
 </div>
