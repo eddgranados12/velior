@@ -232,14 +232,14 @@ class Sistema
     public function getRutaInicio()
     {
         if ($this->esAdmin()) {
-            return "admin/index.php";
+            return "/velior/admin/index.php";
         }
 
         if ($this->esCliente()) {
-            return "index.php";
+            return "/velior/index.php";
         }
 
-        return "admin/login.php?accion=login";
+        return "/velior/admin/login.php?accion=login";
     }
 
     public function redirigirSegunRol()
