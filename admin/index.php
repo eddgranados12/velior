@@ -17,14 +17,17 @@ if (!$sistema->esAdmin()) {
 
 $sistema->checarPermiso('dashboard.view');
 
-$dashboard = new DashboardModel($sistema->db());
-
-/* ESTADISTICAS */
-
-$total_productos = $dashboard->totalProductos();
-//$total_categorias = $dashboard->totalCategorias();
-//$total_subcategorias = $dashboard->totalSubcategorias();
-//$total_colecciones = $dashboard->totalColecciones();
+try {
+    $dashboard = new DashboardModel($sistema->db());
+    $total_productos = $dashboard->totalProductos();
+    $total_categorias = $dashboard->totalCategorias();
+    $total_subcategorias = $dashboard->totalSubcategorias();
+    $total_colecciones = $dashboard->totalColecciones();
+} catch (Exception $e) {
+    die("Error: " . $e->getMessage());
+} catch (Error $e) {
+    die("Error fatal: " . $e->getMessage());
+}
 
 include_once(__DIR__ . "/views/header.php");
 
