@@ -39,6 +39,7 @@
                 <a href="/velior/admin/registro.php">No tengo cuenta</a>
                 
             </div>
+            
 
             <button type="submit" class="btn btn-login">
                 <i class="fas fa-sign-in-alt"></i>
