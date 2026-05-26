@@ -452,7 +452,7 @@
                         <!-- PRODUCTO -->
                         <div class="producto-info">
                             <?php if (!empty($item['imagen_url'])): ?>
-                                <img src="/velior/uploads/<?= htmlspecialchars($item['imagen_url']) ?>"
+                               <img src="/velior/uploads/productos/<?= htmlspecialchars($item['imagen_url']) ?>"
                                     alt="<?= htmlspecialchars($item['nombre']) ?>" class="producto-imagen">
                             <?php else: ?>
                                 <div class="producto-imagen-placeholder">
