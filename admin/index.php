@@ -1,7 +1,7 @@
 <?php
 
 require_once(__DIR__ . "/sistema.class.php");
-//require_once(__DIR__ . "/models/DashboardModel.php");
+require_once(__DIR__ . "/models/DashboardModel.php");
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -17,11 +17,11 @@ if (!$sistema->esAdmin()) {
 
 $sistema->checarPermiso('dashboard.view');
 
-//$dashboard = new DashboardModel($sistema->db());
+$dashboard = new DashboardModel($sistema->db());
 
 /* ESTADISTICAS */
 
-//$total_productos = $dashboard->totalProductos();
+$total_productos = $dashboard->totalProductos();
 //$total_categorias = $dashboard->totalCategorias();
 //$total_subcategorias = $dashboard->totalSubcategorias();
 //$total_colecciones = $dashboard->totalColecciones();
