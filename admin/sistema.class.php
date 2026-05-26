@@ -151,32 +151,7 @@ class Sistema
         return false;
     }
 
-    function envioCorreo($nombre_destinatario, $destinatario, $asunto, $cuerpo, $adjuntos = null)
-    {
-        require '../vendor/autoload.php';
-        $mail = new PHPMailer();
-        $mail->isSMTP();
-        //Enable SMTP debugging
-        //SMTP::DEBUG_OFF = off (for production use)
-        //SMTP::DEBUG_CLIENT = client messages
-        //SMTP::DEBUG_SERVER = client and server messages
-        $mail->SMTPDebug = SMTP::DEBUG_OFF;
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Port = 465;
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $mail->SMTPAuth = true;
-        $mail->Username = '22030782@itcelaya.edu.mx';
-        $mail->Password = 'tglglmxbvpqtwsus';
-        $mail->setFrom('22030782@itcelaya.edu.mx', 'Eduardo Granados');
-        $mail->addAddress($destinatario, $nombre_destinatario);
-        $mail->Subject = $asunto;
-        $mail->msgHTML($cuerpo);
-        if (!$mail->send()) {
-            return false;
-        } else {
-            return true;
-        }
-    }
+
 
     // ============================
     // NUEVAS FUNCIONES DE SEGURIDAD
@@ -264,6 +239,84 @@ class Sistema
         return null;
     }
 
+
+
+
+function envioCorreo($nombre_destinatario, $destinatario, $asunto, $cuerpo, $adjuntos = null)
+    {
+        require '../vendor/autoload.php';
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        //Enable SMTP debugging
+        //SMTP::DEBUG_OFF = off (for production use)
+        //SMTP::DEBUG_CLIENT = client messages
+        //SMTP::DEBUG_SERVER = client and server messages
+        $mail->SMTPDebug = SMTP::DEBUG_OFF;
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 465;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->SMTPAuth = true;
+        $mail->Username = '22030782@itcelaya.edu.mx';
+        $mail->Password = 'tglglmxbvpqtwsus';
+        $mail->setFrom('22030782@itcelaya.edu.mx', 'Eduardo Granados');
+        $mail->addAddress($destinatario, $nombre_destinatario);
+        $mail->Subject = $asunto;
+        $mail->msgHTML($cuerpo);
+        if (!$mail->send()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    function token($correo)
+    {
+        if (filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+            $this->conectar();
+            $sql = "SELECT * FROM usuario WHERE correo = :correo";
+            $stmt = $this->getDb()->prepare($sql);
+            $stmt->bindParam(':correo', $correo, PDO::PARAM_STR);
+            $stmt->execute();
+            $cantidad = $stmt->rowCount();
+            if ($cantidad > 0) {
+                $port1 = md5('Cruz azul campeon');
+                $port2 = md5(random_bytes(16));
+                $token = $port1 . $port2;
+                $sql = "UPDATE usuario SET token = :token WHERE correo = :correo";
+                $stmt = $this->getDb()->prepare($sql);
+                $stmt->bindParam(':token', $token, PDO::PARAM_STR);
+                $stmt->bindParam(':correo', $correo, PDO::PARAM_STR);
+                $stmt->execute();
+
+                $contenido = "<p> Estimado usuario, haz solicitado restablecer tu contraseña. Para cambiar tu contraseña, haz clic en el siguiente enlace:</p>";
+                $contenido .= "<p><a href='http://localhost/velior/admin/login.php?accion=restablecer&correo=$correo&token=$token'>Restablecer contraseña</a>";
+                $this->envioCorreo('Usuario', $correo, 'Recuperar contraseña', $contenido, null);
+
+            }
+        }
+    }
+
+
+    function cambiarContrasena($correo, $token, $contrasena_nueva){
+        $this->conectar();
+        $sql = "SELECT * FROM usuario WHERE correo = :correo AND token = :token";
+        $stmt = $this->getDb()->prepare($sql);
+        $stmt->bindParam(':correo', $correo, PDO::PARAM_STR);
+        $stmt->bindParam(':token', $token, PDO::PARAM_STR);
+        $stmt->execute();
+        $cantidad = $stmt->rowCount();
+        if ($cantidad > 0) {
+            $password = md5($contrasena_nueva);
+            $sql = "UPDATE usuario SET contrasena = :contrasena, token = NULL WHERE correo = :correo";
+            $stmt = $this->getDb()->prepare($sql);
+            $stmt->bindParam(':contrasena', $password, PDO::PARAM_STR);
+            $stmt->bindParam(':correo', $correo, PDO::PARAM_STR);
+            return $stmt->execute();
+            return true;
+        } else{
+            return false;
+        }
+    }
 
 }
 
