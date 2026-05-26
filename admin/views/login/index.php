@@ -35,7 +35,7 @@
             </div>
 
             <div class="forgot-password-link" style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;">
-                <a href="/velior/admin/login.php?accion=recuperar">¿Olvidaste tu contraseñaaaa?</a>
+                <a href="/velior/admin/login.php?accion=recuperar">¿Olvidaste tu contraseña?</a>
                 <a href="/velior/admin/registro.php">No tengo cuenta</a>
                 
             </div>
