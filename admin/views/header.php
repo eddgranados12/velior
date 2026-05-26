@@ -7,12 +7,13 @@
     <title>Velior Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="/Velior/css/admin_forms.css">
-    <link rel="stylesheet" href="/Velior/css/admin_tables.css">
-    <link rel="stylesheet" href="/Velior/css/admin_dashboard.css">
-    <link rel="stylesheet" href="/Velior/css/admin_navbar.css">
+    <link rel="stylesheet" href="/velior/css/admin_forms.css">
+    <link rel="stylesheet" href="/velior/css/admin_tables.css">
+    <link rel="stylesheet" href="/velior/css/admin_dashboard.css">
+    <link rel="stylesheet" href="/velior/css/admin_navbar.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/Velior/css/admin_navbar.css" </head>
+    <link rel="stylesheet" href="/velior/css/admin_navbar.css">
+</head>
 
 <body>
 
