@@ -67,12 +67,12 @@ $app = new Sistema();
 
         <div class="nav-icons">
 
-            <a href="/velior/favoritos.php" class="icon-link">
+            <a href="/velior/mi_cuenta.php?seccion=favoritos" class="icon-link">
                 <i class="bi bi-heart-fill"></i>
                 <span class="badge">0</span>
             </a>
 
-            <a href="/velior/carrito.php" class="icon-link">
+            <a href="/velior/admin/carrito.php" class="icon-link">
                 <i class="bi bi-cart-fill"></i>
                 <span class="badge">0</span>
             </a>
