@@ -10,14 +10,15 @@ if (session_status() === PHP_SESSION_NONE) {
 $sistema = new Sistema();
 $sistema->requiereLogin();
 
+echo "<pre>";
+var_dump($_SESSION);
+die();
+
 if (!$sistema->esAdmin()) {
     header("Location: /velior/index.php");
     exit();
 }
 
-echo "<pre>";
-print_r($_SESSION['permisos']);
-die();
 $sistema->checarPermiso('dashboard.view');
 
 $dashboard = new DashboardModel($sistema->db());
