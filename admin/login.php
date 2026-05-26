@@ -19,11 +19,16 @@ switch ($accion) {
             $contrasena = $_POST['contrasena'];
 
             if ($app->login($correo, $contrasena)) {
-                $ruta = $app->getRutaInicio();
-                echo "Ruta calculada: " . $ruta;
-                die();
 
+                echo "<pre>";
+                echo "Roles: ";
+                print_r($_SESSION['roles']);
+                echo "Permisos: ";
+                print_r($_SESSION['permisos']);
+                echo "</pre>";
+                die();
                 $app->redirigirSegunRol();
+
             } else {
                 require_once(__DIR__ . "/views/login/login_header.php");
                 $app->alerta('error', 'Correo o contraseña incorrectos. Por favor, inténtalo de nuevo.');
