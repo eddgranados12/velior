@@ -3,6 +3,7 @@
 //  MODELO: Carrito
 // ============================================================
 
+
 class Carrito
 {
     private PDO $db;
@@ -18,7 +19,7 @@ class Carrito
     public function obtenerOCrearCarrito(int $idUsuario): int
     {
         $stmt = $this->db->prepare("
-            SELECT id_carrito FROM carrito
+            SELECT id_carrito FROM carrito 
             WHERE id_usuario = :id_usuario AND estado = 'activo'
             LIMIT 1
         ");
