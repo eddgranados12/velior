@@ -1,11 +1,7 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-ini_set('log_errors', 1);
-ini_set('error_log', __DIR__ . '/error_debug.log');
+
 require_once(__DIR__ . "/sistema.class.php");
-require_once(__DIR__ . "/models/DashboardModel.php");
+require_once(__DIR__ . "/models/dashboardModel.php");
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -25,10 +21,10 @@ $dashboard = new DashboardModel($sistema->db());
 
 /* ESTADISTICAS */
 
-//$total_productos = $dashboard->totalProductos();
-//$total_categorias = $dashboard->totalCategorias();
-//$total_subcategorias = $dashboard->totalSubcategorias();
-//$total_colecciones = $dashboard->totalColecciones();
+$total_productos = $dashboard->totalProductos();
+$total_categorias = $dashboard->totalCategorias();
+$total_subcategorias = $dashboard->totalSubcategorias();
+$total_colecciones = $dashboard->totalColecciones();
 
 include_once(__DIR__ . "/views/header.php");
 
