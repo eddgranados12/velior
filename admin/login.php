@@ -1,11 +1,5 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-ini_set('log_errors', 1);
-ini_set('error_log', __DIR__ . '/mi_error.log');
-
 // CONTROLADORRRR
 require_once(__DIR__ . "/sistema.class.php");
 
@@ -25,6 +19,16 @@ switch ($accion) {
             $contrasena = $_POST['contrasena'];
 
             if ($app->login($correo, $contrasena)) {
+                // AGREGA ESTO TEMPORALMENTE
+                echo "<pre>";
+                echo "Roles: ";
+                print_r($_SESSION['roles']);
+                echo "Es admin: ";
+                var_dump($app->esAdmin());
+                echo "Es cliente: ";
+                var_dump($app->esCliente());
+                echo "</pre>";
+                die();
                 $app->redirigirSegunRol();
             } else {
                 require_once(__DIR__ . "/views/login/login_header.php");
