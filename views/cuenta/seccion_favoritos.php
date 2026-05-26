@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . "/../../admin/models/favorito.php");
+require_once(__DIR__ . "/../../admin/models/Favorito.php");
 
 $idUsuario = $_SESSION['id_usuario'] ?? null;
 $favoritoModel = new Favorito();
