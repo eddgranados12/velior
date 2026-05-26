@@ -20,13 +20,7 @@ switch ($accion) {
 
             if ($app->login($correo, $contrasena)) {
 
-                echo "<pre>";
-                echo "Roles: ";
-                print_r($_SESSION['roles']);
-                echo "Permisos: ";
-                print_r($_SESSION['permisos']);
-                echo "</pre>";
-                die();
+            
                 $app->redirigirSegunRol();
 
             } else {
