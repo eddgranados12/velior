@@ -22,7 +22,7 @@ $favoritos = $favoritoModel->obtenerPorUsuario($idUsuario);
             <div style="border: 1px solid #ddd; border-radius: 8px; overflow: hidden; text-align: center; transition: all 0.3s;">
                 <a href="/velior/detalle_producto.php?id=<?php echo $producto['id_producto']; ?>" style="text-decoration: none; color: inherit;">
                     <?php if ($producto['imagen_url']): ?>
-                        <img src="/velior/<?php echo htmlspecialchars($producto['imagen_url']); ?>" alt="<?php echo htmlspecialchars($producto['nombre']); ?>" style="width: 100%; height: 200px; object-fit: cover;">
+                        <img src="/velior/uploads/productos/<?php echo htmlspecialchars($producto['imagen_url']); ?>" alt="<?php echo htmlspecialchars($producto['nombre']); ?>" style="width: 100%; height: 200px; object-fit: cover;">
                     <?php else: ?>
                         <div style="width: 100%; height: 200px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999;">
                             Sin imagen
