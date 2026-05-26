@@ -19,16 +19,10 @@ switch ($accion) {
             $contrasena = $_POST['contrasena'];
 
             if ($app->login($correo, $contrasena)) {
-                // AGREGA ESTO TEMPORALMENTE
-                echo "<pre>";
-                echo "Roles: ";
-                print_r($_SESSION['roles']);
-                echo "Es admin: ";
-                var_dump($app->esAdmin());
-                echo "Es cliente: ";
-                var_dump($app->esCliente());
-                echo "</pre>";
+                $ruta = $app->getRutaInicio();
+                echo "Ruta calculada: " . $ruta;
                 die();
+
                 $app->redirigirSegunRol();
             } else {
                 require_once(__DIR__ . "/views/login/login_header.php");
